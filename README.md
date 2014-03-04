@@ -40,5 +40,12 @@ for line in oh.getWarnings():
     print '  %s' % line
 ```
 
+## Used by other projects
+This library is used in the following projects:
+
+* [opening\_hours\_bot][]
+
+[opening\_hours\_bot]: https://github.com/ypid/opening_hours_bot
+
 ## Other modules
 * [osm-opening-hours](https://github.com/martinfilliau/osm-opening-hours) (pure python implementation)

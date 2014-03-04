@@ -14,7 +14,7 @@
 	},
 	"bugs": "https://github.com/ypid/opening_hours_bot/issues?state=open",
 	"dependencies": {
-		"opening_hours": ">=2.1.6"
+		"opening_hours": ">=2.1.7"
 	},
 	"keywords": [
 		"openstreetmap",
