@@ -33,7 +33,13 @@ class OpeningHours:
 
         query = {'value': value}
         # print query
-        self._oh_interpreter.stdin.write(value + '\n')
+        try:
+            self._oh_interpreter.stdin.write(value + '\n')
+        except IOError:
+            # nodejs did notice that file "poh/osm_time/node_modules/opening_hours/interactive_testing.js" does not exist.
+            # "Error: Cannot find module '$path_to_repo/poh/osm_time/node_modules/opening_hours/interactive_testing.js'"
+            sys.stderr.write('Module was not installed properly. Please consult the README from pyopening_hours.\n')
+            sys.exit(1)
         result_json = StringIO()
         while True:
             line = self._oh_interpreter.stdout.readline().rstrip()
