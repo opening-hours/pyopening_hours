@@ -31,10 +31,10 @@ class OpeningHours:
         """Constructs opening_hours object, given the opening_hours tag value."""
         # read description (meant for humans) from interactive_testing.js
 
-        query = {'value': value}
+        query = {'value': value.encode('UTF-8')}
         # print query
         try:
-            self._oh_interpreter.stdin.write(value + '\n')
+            self._oh_interpreter.stdin.write(query['value'] + '\n')
         except IOError:
             # nodejs did notice that file "poh/osm_time/node_modules/opening_hours/interactive_testing.js" does not exist.
             # "Error: Cannot find module '$path_to_repo/poh/osm_time/node_modules/opening_hours/interactive_testing.js'"
