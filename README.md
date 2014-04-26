@@ -25,15 +25,15 @@ from osm_time.OpeningHours import OpeningHours, ParseException
 import datetime
 
 try:
-    oh = OpeningHours('fail "not valid keyword"')
+    oh = OpeningHours(u'Lun-') # Returns except message with unicode ;)
 except ParseException as e:
-    print e
+    print unicode(e.message).encode("utf-8")
 
-value = u'Mon,Tu,Th,Fr 12:00-18:00; Samstag 12:00-17:00; Th[3] OFF; Th[-1] off'
+value = u'Mon,Tu,Th,Fr 12:00-18:00; Samstag 12:00-17:00 "I ❤ unicode"; Th[3] OFF; Th[-1] off'
 oh = OpeningHours(value)
 print 'Parsing complex value: %s' % value
 print 'Is%s week stable' % ('' if oh.isWeekStable() else ' not')
-print 'State of facility is %s' % oh.getStateString()
+print 'Facility is %s' % oh.getStateString()
 print 'Next change in UTC: %s' % oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S')
 print 'Warnings:'
 for line in oh.getWarnings():
