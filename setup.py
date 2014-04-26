@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(name         = 'pyopening_hours',
       version      = '0.1',
@@ -9,8 +9,9 @@ setup(name         = 'pyopening_hours',
       author       = 'Robin `ypid` Schneider',
       author_email = 'ypid23@aol.de',
       url          = 'https://github.com/ypid/pyopening_hours',
-      packages     = ['osm_time', 'osm_time.OpeningHours'],
+      packages     = ['osm_time'],
       package_dir  = {'osm_time': 'osm_time/'},
-      package_data = {'osm_time': ['node_modules/']},
+      package_data = {'osm_time': [' node_modules/*']}, # WTF, the first character in this list is ignored?
       license      = 'BSD',
+      test_suite   = 'tests',
      )
