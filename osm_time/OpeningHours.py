@@ -5,12 +5,16 @@
 from osm_time import ParseException
 
 import subprocess, json, os
+import time
+import socket
+import tempfile
 import dateutil.parser
 from StringIO import StringIO
 
 class OpeningHours:
+    _socket_path = os.path.join(tempfile.mkdtemp(), 'communicate.sock')
 
-    __subprocess_param = ['node', '%s/node_modules/opening_hours/interactive_testing.js' % os.path.dirname(__file__) ]
+    __subprocess_param = ['node', '%s/node_modules/opening_hours/interactive_testing.js' % os.path.dirname(__file__), _socket_path ]
     try:
         _oh_interpreter = subprocess.Popen(
                 __subprocess_param,
@@ -24,8 +28,9 @@ class OpeningHours:
                 stdout=subprocess.PIPE,
                 stdin=subprocess.PIPE
             )
-
-    _oh_interpreter.stdout.readline()
+    time.sleep(0.1)
+    __sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    __sock.connect(_socket_path)
 
     def __init__(self, value, nominatiomJSON=None, mode=None):
         """Constructs opening_hours object, given the opening_hours tag value."""
@@ -34,20 +39,15 @@ class OpeningHours:
         query = {'value': value.encode('UTF-8')}
         # print query
         try:
-            self._oh_interpreter.stdin.write(query['value'] + '\n')
+            self.__sock.send(query['value'])
         except IOError:
             # nodejs did notice that file "poh/osm_time/node_modules/opening_hours/interactive_testing.js" does not exist.
             # "Error: Cannot find module '$path_to_repo/osm_time/node_modules/opening_hours/interactive_testing.js'"
             raise ImportError('Module was not installed properly. Please consult the README from pyopening_hours.')
-        result_json = StringIO()
-        while True:
-            line = self._oh_interpreter.stdout.readline().rstrip()
-            if line is not '}':
-                result_json.write(line + '\n')
-            else:
-                result_json.write('}')
-                break
-        self._result_object = json.loads(result_json.getvalue())
+
+        result_json = ''
+        result_json = self.__sock.recv( 23000 )
+        self._result_object = json.loads(result_json)
 
         if self._result_object['error']:
             raise ParseException(value, self._result_object['eval_notes'])
