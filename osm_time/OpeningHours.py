@@ -4,7 +4,7 @@
 
 from osm_time import ParseException
 
-import subprocess, json, sys, os
+import subprocess, json, os
 import dateutil.parser
 from StringIO import StringIO
 
@@ -37,9 +37,8 @@ class OpeningHours:
             self._oh_interpreter.stdin.write(query['value'] + '\n')
         except IOError:
             # nodejs did notice that file "poh/osm_time/node_modules/opening_hours/interactive_testing.js" does not exist.
-            # "Error: Cannot find module '$path_to_repo/poh/osm_time/node_modules/opening_hours/interactive_testing.js'"
-            sys.stderr.write('Module was not installed properly. Please consult the README from pyopening_hours.\n')
-            sys.exit(1)
+            # "Error: Cannot find module '$path_to_repo/osm_time/node_modules/opening_hours/interactive_testing.js'"
+            raise ImportError('Module was not installed properly. Please consult the README from pyopening_hours.')
         result_json = StringIO()
         while True:
             line = self._oh_interpreter.stdout.readline().rstrip()
@@ -108,7 +107,7 @@ class OpeningHours:
 
 # main {{{
 def test():
-    """Run tests."""
+    """Run examples."""
 
     oh_interpreter = OpeningHours()
     print oh_interpreter.eval('open')
