@@ -3,11 +3,14 @@ python:
     - 2.6
     - 2.7
     - pypy
+    - pypy3
     - 3.2
     - 3.3
     - 3.4
 install:
-    make installDependencies
+    - make installDependencies
+
+script: make test
 
 notifications:
     email:
