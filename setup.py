@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name         = 'pyopening_hours',
-    version      = '0.1',
+    version      = '0.1.1',
     description  = 'Python module providing access to the opening_hours.js library which is written in JavaScript.',
     author       = 'Robin `ypid` Schneider',
     author_email = 'ypid23@aol.de',
