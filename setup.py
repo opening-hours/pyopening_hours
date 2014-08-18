@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name         = 'pyopening_hours',
-    version      = '0.1.1',
+    version      = '0.1.2',
     description  = 'Python module providing access to the opening_hours.js library which is written in JavaScript.',
     author       = 'Robin `ypid` Schneider',
     author_email = 'ypid23@aol.de',
@@ -18,6 +18,7 @@ setup(
         'pyopening_hours': [
             'node_modules/opening_hours/node_modules/suncalc/suncalc.js',
             'node_modules/opening_hours/opening_hours.js',
+            'node_modules/opening_hours/interactive_testing.js',
         ]
     },
     install_requires=[
