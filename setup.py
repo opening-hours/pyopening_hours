@@ -11,8 +11,9 @@ setup(
     author_email = 'ypid23@aol.de',
     url          = 'https://github.com/ypid/pyopening_hours',
     packages     = ['pyopening_hours'],
-    license      = 'BSD',
+    license      = 'GPLv3',
     test_suite   = 'tests',
+    keywords     = ['OSM', 'OpenStreetMap', 'opening_hours'],
     install_requires=[
         'unittest2',
         'python-dateutil',
