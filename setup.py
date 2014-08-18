@@ -14,6 +14,12 @@ setup(
     license      = 'GPLv3',
     test_suite   = 'tests',
     keywords     = ['OSM', 'OpenStreetMap', 'opening_hours'],
+    package_data = {
+        'pyopening_hours': [
+            'node_modules/opening_hours/node_modules/suncalc/suncalc.js',
+            'node_modules/opening_hours/opening_hours.js',
+        ]
+    },
     install_requires=[
         'unittest2',
         'python-dateutil',

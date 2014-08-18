@@ -29,7 +29,7 @@ import pyopening_hours
 try:
     oh = pyopening_hours.OpeningHours(u'Lun-')
 except pyopening_hours.ParseException as error:
-    print(unicode(error.message))
+    print(error.message)
 
 value = u'Mon,Tu,Th,Fr 12:00-18:00; Samstag 12:00-17:00 "I ❤ unicode"; Th[3] OFF; Th[-1] off'
 oh = pyopening_hours.OpeningHours(value)

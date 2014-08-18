@@ -1,5 +1,4 @@
 include README.md
 include LICENSE
-graft pyopening_hours/node_modules
 recursive-include tests *.py
 prune tests/.ropeproject
