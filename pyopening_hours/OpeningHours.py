@@ -9,7 +9,6 @@ import os
 import time
 import socket
 import tempfile
-from StringIO import StringIO
 
 import dateutil.parser
 
@@ -24,8 +23,7 @@ class OpeningHours:
     __subprocess_param = [
         'node',
         '%s/node_modules/opening_hours/interactive_testing.js' %
-        os.path.dirname(
-            __file__),
+        os.path.dirname(__file__),
         _socket_path]
     try:
         _oh_interpreter = subprocess.Popen(
@@ -34,7 +32,7 @@ class OpeningHours:
             stdin=subprocess.PIPE
         )
     except OSError:
-        subprocess_param[0] = 'nodejs'
+        __subprocess_param[0] = 'nodejs'
         _oh_interpreter = subprocess.Popen(
             __subprocess_param,
             stdout=subprocess.PIPE,
@@ -58,7 +56,6 @@ class OpeningHours:
             raise ImportError(
                 'Module was not installed properly. Please consult the README from pyopening_hours.')
 
-        result_json = ''
         result_json = self.__sock.recv(23000)
         self._result_object = json.loads(result_json)
 
@@ -98,7 +95,7 @@ class OpeningHours:
             return None
 
     def getNextChange(self, *args):
-        """returns time of next status change"""
+        """Returns time of next status change."""
         try:
             return dateutil.parser.parse(self._result_object['next_change'])
         except KeyError:
@@ -115,20 +112,3 @@ class OpeningHours:
     def _getAll(self, *args):
         """Debugging: Get full result object as returned by interactive_testing.js"""
         return self._result_object
-
-# }}}
-
-# main {{{
-def test():
-    """Run examples."""
-
-    oh_interpreter = OpeningHours()
-    print oh_interpreter.eval('open')
-    print 'test'
-    print oh_interpreter.eval('closed')
-    print oh_interpreter.eval('fail')
-
-
-if __name__ == '__main__':
-    test()
-# }}}
