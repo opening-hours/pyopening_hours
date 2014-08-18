@@ -15,5 +15,6 @@ setup(
     test_suite   = 'tests',
     install_requires=[
         'unittest2',
+        'python-dateutil',
     ],
 )

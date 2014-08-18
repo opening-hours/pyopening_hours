@@ -2,7 +2,7 @@ import unittest
 
 from pyopening_hours import OpeningHours, ParseException
 
-class TestOpeningDays(unittest.TestCase):
+class TestOpeningHours(unittest.TestCase):
 
     def test_twenty_four_seven(self):
         oh = OpeningHours('24/7')
@@ -18,4 +18,5 @@ class TestOpeningDays(unittest.TestCase):
         self.assertRaises(ParseException, OpeningHours, ' ')
 
 if __name__ == "__main__":
-    unittest.main()
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestOpeningHours)
+    unittest.TextTestRunner().run(suite)
