@@ -13,4 +13,7 @@ setup(
     packages     = ['pyopening_hours'],
     license      = 'BSD',
     test_suite   = 'tests',
+    install_requires=[
+        'unittest2',
+    ],
 )

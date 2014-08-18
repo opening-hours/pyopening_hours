@@ -57,7 +57,7 @@ class OpeningHours:
                 'Module was not installed properly. Please consult the README from pyopening_hours.')
 
         result_json = self.__sock.recv(23000)
-        self._result_object = json.loads(result_json)
+        self._result_object = json.loads(result_json.decode('utf-8'))
 
         if self._result_object['error']:
             raise ParseException(value, self._result_object['eval_notes'])

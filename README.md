@@ -1,4 +1,7 @@
 # pyopening_hours
+
+[![Build Status](https://travis-ci.org/ypid/pyopening_hours.svg?branch=master)](https://travis-ci.org/ypid/pyopening_hours)
+
 Python module providing access to the [opening_hours.js][oh-lib] library which is written in JavaScript.
 
 [oh-lib]: https://github.com/ypid/opening_hours.js
