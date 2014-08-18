@@ -21,23 +21,22 @@ npm install
 ## Usage
 
 ```python
-from osm_time.OpeningHours import OpeningHours, ParseException
-import datetime
+import pyopening_hours
 
 try:
-    oh = OpeningHours(u'Lun-') # Returns except message with unicode ;)
-except ParseException as e:
-    print unicode(e.message).encode("utf-8")
+    oh = pyopening_hours.OpeningHours(u'Lun-')
+except pyopening_hours.ParseException as error:
+    print(unicode(error.message))
 
 value = u'Mon,Tu,Th,Fr 12:00-18:00; Samstag 12:00-17:00 "I ❤ unicode"; Th[3] OFF; Th[-1] off'
-oh = OpeningHours(value)
-print 'Parsing complex value: %s' % value
-print 'Is%s week stable' % ('' if oh.isWeekStable() else ' not')
-print 'Facility is %s' % oh.getStateString()
-print 'Next change in UTC: %s' % oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S')
-print 'Warnings:'
+oh = pyopening_hours.OpeningHours(value)
+print('Parsing complex value: %s' % value)
+print('Is%s week stable' % ('' if oh.isWeekStable() else ' not'))
+print('Facility is %s' % oh.getStateString())
+print('Next change in UTC: %s' % oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S'))
+print('Warnings:')
 for line in oh.getWarnings():
-    print '  %s' % line
+    print('  ' + line)
 ```
 
 ## Used by other projects

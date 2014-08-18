@@ -1,6 +1,6 @@
 import unittest
 
-from osm_time.OpeningHours import OpeningHours, ParseException
+from pyopening_hours import OpeningHours, ParseException
 
 class TestOpeningDays(unittest.TestCase):
 

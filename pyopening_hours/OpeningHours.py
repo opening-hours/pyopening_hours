@@ -13,8 +13,10 @@ from StringIO import StringIO
 
 import dateutil.parser
 
-from . import ParseException
-
+class ParseException(Exception):
+    def __init__(self, value_to_parse, inner_message):
+        self.message = u'Can‘t parse value: "{0}", {1}'.format(value_to_parse.replace('\n', ''), inner_message)
+        Exception.__init__(self, self.message)
 
 class OpeningHours:
     _socket_path = os.path.join(tempfile.mkdtemp(), 'communicate.sock')
