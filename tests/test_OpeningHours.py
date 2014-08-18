@@ -9,9 +9,13 @@ class TestOpeningDays(unittest.TestCase):
         self.assertEqual(oh.getStateString(), 'open')
         self.assertTrue(oh.isWeekStable())
 
+        oh = OpeningHours('open')
+        self.assertEqual(oh.getStateString(), 'open')
+        self.assertTrue(oh.isWeekStable())
+
     def test_invalid_value(self):
         self.assertRaises(ParseException, OpeningHours, 'fail "not valid keyword"')
-        self.assertRaises(ParseException, OpeningHours, '')
+        self.assertRaises(ParseException, OpeningHours, ' ')
 
 if __name__ == "__main__":
     unittest.main()

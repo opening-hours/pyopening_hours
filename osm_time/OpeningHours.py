@@ -1,33 +1,43 @@
 #!/usr/bin/env python
 # encoding: utf-8
-# Quick and dirty abstraction layer for the JavaScript library opening_hours.js. May use PyV8 or zerorpc in the future.
+"""Quick and dirty abstraction layer for the JavaScript library
+opening_hours.js. May use PyV8 or zerorpc in the future."""
 
-from osm_time import ParseException
-
-import subprocess, json, os
+import subprocess
+import json
+import os
 import time
 import socket
 import tempfile
-import dateutil.parser
 from StringIO import StringIO
+
+import dateutil.parser
+
+from . import ParseException
+
 
 class OpeningHours:
     _socket_path = os.path.join(tempfile.mkdtemp(), 'communicate.sock')
 
-    __subprocess_param = ['node', '%s/node_modules/opening_hours/interactive_testing.js' % os.path.dirname(__file__), _socket_path ]
+    __subprocess_param = [
+        'node',
+        '%s/node_modules/opening_hours/interactive_testing.js' %
+        os.path.dirname(
+            __file__),
+        _socket_path]
     try:
         _oh_interpreter = subprocess.Popen(
-                __subprocess_param,
-                stdout=subprocess.PIPE,
-                stdin=subprocess.PIPE
-            )
+            __subprocess_param,
+            stdout=subprocess.PIPE,
+            stdin=subprocess.PIPE
+        )
     except OSError:
         subprocess_param[0] = 'nodejs'
         _oh_interpreter = subprocess.Popen(
-                __subprocess_param,
-                stdout=subprocess.PIPE,
-                stdin=subprocess.PIPE
-            )
+            __subprocess_param,
+            stdout=subprocess.PIPE,
+            stdin=subprocess.PIPE
+        )
     time.sleep(0.1)
     __sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     __sock.connect(_socket_path)
@@ -43,10 +53,11 @@ class OpeningHours:
         except IOError:
             # nodejs did notice that file "poh/osm_time/node_modules/opening_hours/interactive_testing.js" does not exist.
             # "Error: Cannot find module '$path_to_repo/osm_time/node_modules/opening_hours/interactive_testing.js'"
-            raise ImportError('Module was not installed properly. Please consult the README from pyopening_hours.')
+            raise ImportError(
+                'Module was not installed properly. Please consult the README from pyopening_hours.')
 
         result_json = ''
-        result_json = self.__sock.recv( 23000 )
+        result_json = self.__sock.recv(23000)
         self._result_object = json.loads(result_json)
 
         if self._result_object['error']:
