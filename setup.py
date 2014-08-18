@@ -11,8 +11,6 @@ setup(
     author_email = 'ypid23@aol.de',
     url          = 'https://github.com/ypid/pyopening_hours',
     packages     = ['pyopening_hours'],
-    package_data = {'osm_time': [' node_modules/*']},
-    # WTF, the first character in this list is ignored?
     license      = 'BSD',
     test_suite   = 'tests',
 )
