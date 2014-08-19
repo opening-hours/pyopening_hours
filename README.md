@@ -8,18 +8,11 @@ Python module providing access to the [opening_hours.js][oh-lib] library which i
 
 This python library only implements the [simple API](https://github.com/ypid/opening_hours.js#simple-api) from opening_hours.js at the moment (without optional parameters).
 
-## Install
+## Installation
 
-Just clone the repository with
+Install [`pyopening_hours`](https://pypi.python.org/pypi/pyopening_hours/) simply by using pip:
 
-```
-git clone https://github.com/ypid/pyopening_hours
-```
-
-and install it’s dependencies (execute inside the repository):
-```
-npm install
-```
+    pip install pyopening_hours
 
 ## Usage
 
@@ -40,6 +33,19 @@ print('Next change in UTC: %s' % oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S'
 print('Warnings:')
 for line in oh.getWarnings():
     print('  ' + line)
+```
+
+## Development
+
+Just clone the repository with
+
+```
+git clone https://github.com/ypid/pyopening_hours
+```
+
+and install it’s dependencies (execute inside the repository):
+```
+make installDependencies
 ```
 
 ## Used by other projects
