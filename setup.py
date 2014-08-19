@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 from setuptools import setup
+import codecs
 
 setup(
     name         = 'pyopening_hours',
@@ -25,4 +26,5 @@ setup(
         'unittest2',
         'python-dateutil',
     ],
+    long_description = codecs.open('README.rst', encoding='UTF-8', mode='r').read(),
 )

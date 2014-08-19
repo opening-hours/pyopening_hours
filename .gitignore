@@ -1,4 +1,5 @@
 pyopening_hours/node_modules/*
+README.rst
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
