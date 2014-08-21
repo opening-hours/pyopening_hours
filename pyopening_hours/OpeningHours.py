@@ -4,7 +4,16 @@
 opening_hours.js. May use PyV8 or zerorpc in the future."""
 
 import subprocess
-import json
+try:
+    import json
+except ImportError:
+    import sys
+    from java.io import File
+    # jysonModule = File.separator.join([parseTask.app.SCRIPTDIR, "tools", "jyson.jar"])
+    jysonModule = File.separator.join(["tools", "jyson.jar"])
+    if jysonModule not in sys.path:
+        sys.path.append(jysonModule)
+    from com.xhaus.jyson import JysonCodec as json
 import os
 import time
 import socket
