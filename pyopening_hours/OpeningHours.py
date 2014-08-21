@@ -8,9 +8,12 @@ try:
     import json
 except ImportError:
     import sys
+    from os.path import expanduser
+    home = expanduser("~")
     from java.io import File
     # jysonModule = File.separator.join([parseTask.app.SCRIPTDIR, "tools", "jyson.jar"])
-    jysonModule = File.separator.join(["tools", "jyson.jar"])
+    # jysonModule = File.separator.join(["tools", "jyson.jar"])
+    jysonModule = '%s/Projekte/src/osm/qat_script/tools/jyson.jar' % home
     if jysonModule not in sys.path:
         sys.path.append(jysonModule)
     from com.xhaus.jyson import JysonCodec as json
@@ -19,7 +22,7 @@ import time
 import socket
 import tempfile
 
-import dateutil.parser
+# import dateutil.parser
 
 class ParseException(Exception):
     def __init__(self, value_to_parse, inner_message):
@@ -27,13 +30,14 @@ class ParseException(Exception):
         Exception.__init__(self, self.message)
 
 class OpeningHours:
-    _socket_path = os.path.join(tempfile.mkdtemp(), 'communicate.sock')
+    # _socket_path = os.path.join(tempfile.mkdtemp(), 'communicate.sock')
+    _socket_path = 31542
 
     __subprocess_param = [
         'node',
         '%s/node_modules/opening_hours/interactive_testing.js' %
         os.path.dirname(__file__),
-        _socket_path]
+        str(_socket_path)]
     try:
         _oh_interpreter = subprocess.Popen(
             __subprocess_param,
@@ -48,8 +52,8 @@ class OpeningHours:
             stdin=subprocess.PIPE
         )
     time.sleep(0.1)
-    __sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-    __sock.connect(_socket_path)
+    __sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    __sock.connect(('127.0.0.1', _socket_path), )
 
     def __init__(self, value, nominatiomJSON=None, mode=None):
         """Constructs opening_hours object, given the opening_hours tag value."""
@@ -105,10 +109,11 @@ class OpeningHours:
 
     def getNextChange(self, *args):
         """Returns time of next status change."""
-        try:
-            return dateutil.parser.parse(self._result_object['next_change'])
-        except KeyError:
-            return None
+        # try:
+            # return dateutil.parser.parse(self._result_object['next_change'])
+        # except KeyError:
+            # return None
+        return None
 
     def isWeekStable(self, *args):
         """Checks whether open intervals are same for every week."""
