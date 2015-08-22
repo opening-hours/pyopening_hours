@@ -4,8 +4,6 @@
 
 Python module providing access to the [opening_hours.js][oh-lib] library which is written in JavaScript.
 
-[oh-lib]: https://github.com/ypid/opening_hours.js
-
 This python library only implements the [simple API](https://github.com/ypid/opening_hours.js#simple-api) from opening_hours.js at the moment (without optional parameters).
 
 ## Installation
@@ -39,21 +37,23 @@ for line in oh.getWarnings():
 
 Just clone the repository with
 
-```
+```Shell
 git clone https://github.com/ypid/pyopening_hours
 ```
 
 and install it’s dependencies (execute inside the repository):
-```
-make installDependencies
+```Shell
+make dependencies-get
 ```
 
 ## Used by other projects
 This library is used in the following projects:
 
-* [opening\_hours\_bot][]
-
-[opening\_hours\_bot]: https://github.com/ypid/opening_hours_bot
+* [opening_hours_bot][]
 
 ## Other modules
 * [osm-opening-hours](https://github.com/martinfilliau/osm-opening-hours) (pure python implementation)
+
+
+[oh-lib]: https://github.com/ypid/opening_hours.js
+[opening_hours_bot]: https://github.com/ypid/opening_hours_bot

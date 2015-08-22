@@ -1,5 +1,6 @@
+.PHONY: default test package dependencies-get
 
-default: installDependencies test
+default: dependencies-get test
 
 README.rst: README.md
 
@@ -12,8 +13,6 @@ test:
 package: README.rst
 	./setup.py sdist
 
-installDependencies: pyopening_hours/node_modules/opening_hours
+dependencies-get:
 	pip install .
-
-pyopening_hours/node_modules/opening_hours:
 	npm install opening_hours
