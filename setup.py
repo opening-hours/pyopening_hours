@@ -23,7 +23,9 @@ setup(
     package_data = {
         'pyopening_hours': [
             'node_modules/opening_hours/node_modules/suncalc/suncalc.js',
+            'node_modules/opening_hours/node_modules/suncalc/package.json',
             'node_modules/opening_hours/opening_hours.js',
+            'node_modules/opening_hours/package.json',
             'node_modules/opening_hours/interactive_testing.js',
         ]
     },
