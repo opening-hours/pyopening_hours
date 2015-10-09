@@ -14,17 +14,22 @@ import dateutil.parser
 
 class ParseException(Exception):
     def __init__(self, value_to_parse, inner_message):
-        self.message = u'Can‘t parse value: "{0}", {1}'.format(value_to_parse.replace('\n', ''), inner_message)
+        self.message = u'Can‘t parse value: "{0}", {1}'.format(
+            value_to_parse.replace('\n', ''),
+            inner_message,
+        )
         Exception.__init__(self, self.message)
 
 class OpeningHours:
     _socket_path = os.path.join(tempfile.mkdtemp(), 'communicate.sock')
 
     __subprocess_param = [
-        'node',
-        '%s/node_modules/opening_hours/interactive_testing.js' %
-        os.path.dirname(__file__),
-        _socket_path]
+        'nodejs',
+        '{}/node_modules/opening_hours/interactive_testing.js'.format(
+            os.path.dirname(__file__),
+        ),
+        _socket_path
+    ]
     try:
         _oh_interpreter = subprocess.Popen(
             __subprocess_param,
@@ -32,18 +37,24 @@ class OpeningHours:
             stdin=subprocess.PIPE
         )
     except OSError:
-        __subprocess_param[0] = 'nodejs'
-        _oh_interpreter = subprocess.Popen(
-            __subprocess_param,
-            stdout=subprocess.PIPE,
-            stdin=subprocess.PIPE
-        )
-    time.sleep(0.1)
+        try:
+            __subprocess_param[0] = 'node'
+            _oh_interpreter = subprocess.Popen(
+                __subprocess_param,
+                stdout=subprocess.PIPE,
+                stdin=subprocess.PIPE
+            )
+        except:
+            raise ImportError(
+                'NodeJS is not installed.')
+    time.sleep(0.5)
     __sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
     __sock.connect(_socket_path)
 
     def __init__(self, value, nominatiomJSON=None, mode=None):
-        """Constructs opening_hours object, given the opening_hours tag value."""
+        """
+        Constructs opening_hours object, given the opening_hours tag value.
+        """
         # read description (meant for humans) from interactive_testing.js
 
         query = {'value': value.encode('UTF-8')}
@@ -106,9 +117,14 @@ class OpeningHours:
         return self._result_object['week_stable']
 
     def _neededNominatiomJson(self, *args):
-        """Test if nominatiomJSON was *mandatory* to evaluate the value. For <variable_times> FIXME it is not mandatory."""
+        """
+        Test if nominatiomJSON was *mandatory* to evaluate the value.
+        For <variable_times> FIXME it is not mandatory.
+        """
         return self._result_object['needed_nominatiom_json']
 
     def _getAll(self, *args):
-        """Debugging: Get full result object as returned by interactive_testing.js"""
+        """
+        Debugging: Get full result object as returned by interactive_testing.js
+        """
         return self._result_object
