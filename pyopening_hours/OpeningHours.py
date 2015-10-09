@@ -26,7 +26,7 @@ class OpeningHours:
     __subprocess_param = [
         'nodejs',
         '{}/node_modules/opening_hours/interactive_testing.js'.format(
-            os.path.dirname(__file__),
+            os.path.dirname(__file__)
         ),
         _socket_path
     ]
