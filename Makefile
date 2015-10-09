@@ -13,6 +13,9 @@ test:
 package: README.rst
 	./setup.py sdist
 
+release: README.rst
+	./setup.py sdist upload
+
 dependencies-get:
 	pip install .
 	npm install opening_hours

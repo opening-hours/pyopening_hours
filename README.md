@@ -8,7 +8,7 @@ This python library only implements the [simple API](https://github.com/ypid/ope
 
 ## Installation
 
-Install [`pyopening_hours`](https://pypi.python.org/pypi/pyopening_hours/) simply by using pip:
+Install [pyopening_hours](https://pypi.python.org/pypi/pyopening_hours/) simply by using pip:
 
     pip install pyopening_hours
 
@@ -24,11 +24,11 @@ except pyopening_hours.ParseException as error:
 
 value = u'Mon,Tu,Th,Fr 12:00-18:00; Samstag 12:00-17:00 "I ❤ unicode"; Th[3] OFF; Th[-1] off'
 oh = pyopening_hours.OpeningHours(value)
-print('Parsing complex value: %s' % value)
-print('Is%s week stable' % ('' if oh.isWeekStable() else ' not'))
-print('Facility is %s' % oh.getStateString())
-print('Next change in UTC: %s' % oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S'))
-print('Warnings:')
+print(u"Parsing complex value: {}".format(value))
+print(u"Is{} week stable".format('' if oh.isWeekStable() else ' not'))
+print(u"Facility is {}".format(oh.getStateString()))
+print(u"Next change in UTC: {}".format(oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S')))
+print(u"Warnings:")
 for line in oh.getWarnings():
     print('  ' + line)
 ```
