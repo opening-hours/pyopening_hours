@@ -10,7 +10,9 @@ This python library only implements the [simple API](https://github.com/opening-
 
 Install [pyopening_hours](https://pypi.python.org/pypi/pyopening_hours/) simply by using pip:
 
-    pip install pyopening_hours
+```Shell
+pip install pyopening_hours
+```
 
 ## Usage
 
@@ -47,12 +49,15 @@ make dependencies-get
 ```
 
 ## Used by other projects
+
 This library is used in the following projects:
 
 * [opening_hours_bot][]
 
 ## Other modules
+
 * [osm-opening-hours](https://github.com/martinfilliau/osm-opening-hours) (pure python implementation)
+* [Python_OpeningHours](https://github.com/anthill/Python_OpeningHours)
 
 
 [oh-lib]: https://github.com/opening-hours/opening_hours.js
