@@ -40,7 +40,7 @@ for line in oh.getWarnings():
 Just clone the repository with
 
 ```Shell
-git clone https://github.com/ypid/pyopening_hours
+git clone https://github.com/opening-hours/pyopening_hours
 ```
 
 and install it’s dependencies (execute inside the repository):
