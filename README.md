@@ -20,17 +20,17 @@ pip install pyopening_hours
 import pyopening_hours
 
 try:
-    oh = pyopening_hours.OpeningHours(u'Lun-')
+    oh = pyopening_hours.OpeningHours('Lun-')
 except pyopening_hours.ParseException as error:
     print(error.message)
 
-value = u'Mon,Tu,Th,Fr 12:00-18:00; Samstag 12:00-17:00 "I ❤ unicode"; Th[3] OFF; Th[-1] off'
+value = 'Mon,Tu,Th,Fr 12:00-18:00; Samstag 12:00-17:00 "I ❤ unicode"; Th[3] OFF; Th[-1] off'
 oh = pyopening_hours.OpeningHours(value)
-print(u"Parsing complex value: {}".format(value))
-print(u"Is{} week stable".format('' if oh.isWeekStable() else ' not'))
-print(u"Facility is {}".format(oh.getStateString()))
-print(u"Next change in UTC: {}".format(oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S')))
-print(u"Warnings:")
+print(f"Parsing complex value: {value}")
+print(f"Is{'' if oh.isWeekStable() else ' not'} week stable")
+print(f"Facility is {oh.getStateString()}")
+print(f"Next change in UTC: {oh.getNextChange().strftime('%Y-%m-%d %H:%M:%S')}")
+print("Warnings:")
 for line in oh.getWarnings():
     print('  ' + line)
 ```
